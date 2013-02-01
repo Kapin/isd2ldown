@@ -1,3 +1,4 @@
+<!-- Created as a horrible joke and should not be taken seriously. Reiterating that, please don't take the look of this website or anything on it besides Desire2Learn being down seriously. Really... -->
 <html>
 <head>
 <!-- jQuery include -->
@@ -16,10 +17,8 @@ $(document).ready(function(){
 function display() {
     var url = "http://learn.uwaterloo.ca"
 
-    //sets a get request to get the html source
     $.get(url, function(data){
-        //uses get string between fucntion to get the text between the title tags
-        //then calls it in a message box
+        
         var title = getStringBetween(data.responseText, "<title>", "</title>");
         if(title === "Website Down For Planned Maintenance") {
             $('#down').html('YES');
