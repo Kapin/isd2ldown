@@ -1,0 +1,54 @@
+<html>
+<head>
+<!-- jQuery include -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+<!-- This include allows cross domain get requests -->
+<script type="text/javascript" src="https://raw.github.com/padolsey/jQuery-Plugins/master/cross-domain-ajax/jquery.xdomainajax.js"></script>
+
+<!-- Sample -->
+<script type="text/javascript">
+$(document).ready(function(){
+    //gets the href of the first anchor
+   setInterval(display(), 5000); 
+});
+
+function display() {
+    var url = "http://learn.uwaterloo.ca"
+
+    //sets a get request to get the html source
+    $.get(url, function(data){
+        //uses get string between fucntion to get the text between the title tags
+        //then calls it in a message box
+        var title = getStringBetween(data.responseText, "<title>", "</title>");
+        if(title === "Website Down For Planned Maintenance") {
+            $('#down').html('YES');
+        } else {
+            $('#down').html('NO');
+        }
+    });
+    
+        $('#date').html("Updated on: " + (new Date()).toLocaleString())
+}
+
+
+function getStringBetween(input, start, end){
+    var index = input.indexOf(start);
+
+    if(index != -1){
+        index += start.length;
+        var endIndex = input.indexOf(end, index + 1);
+
+        if(endIndex != -1)
+            return input.substr(index, endIndex - index);
+    }
+    return false;
+}
+</script>
+
+</head>
+<body>
+    <marquee><font size = 144 color=#123456 name='Comic Sans'><p id = "down"></p></font></marquee></br>
+    <font size = 50><p id = "date"></p></font>
+</body>
+</html>
