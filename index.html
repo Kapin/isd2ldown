@@ -16,18 +16,23 @@ $(document).ready(function(){
 
 function display() {
     var url = "http://learn.uwaterloo.ca"
-
-    $.get(url, function(data){
-        
+    var worked = false;
+    
+    $.get(url, function(data) {
+        worked = true;
         var title = getStringBetween(data.responseText, "<title>", "</title>");
-        if(title === "Website Down For Planned Maintenance") {
+        if(title === null || title === "Website Down For Planned Maintenance") {
             $('#down').html('YES');
         } else {
             $('#down').html('NO');
         }
     });
     
-        $('#date').html("Updated on: " + (new Date()).toLocaleString())
+    if(worked === false) {
+        $('#down').html('YES');
+    }
+    
+    $('#date').html("Updated on: " + (new Date()).toLocaleString())
 }
 
 
