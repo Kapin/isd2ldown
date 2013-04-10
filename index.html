@@ -22,8 +22,8 @@ function display() {
         worked = true;
         var title = getStringBetween(data.responseText, "<title", "</title>");
         if(title === null || 
-           title.toLowerCase().indexOf("down" === -1 ||
-           title.toLowerCase().indexOf("not available") === -1)) {
+           title.toLowerCase().indexOf("down" !== -1 ||
+           title.toLowerCase().indexOf("not available") !== -1)) {
             $('#down').html('YES');
         } else {
             $('#down').html('NO');
