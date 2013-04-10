@@ -20,8 +20,9 @@ function display() {
     
     $.get(url, function(data) {
         worked = true;
-        var title = getStringBetween(data.responseText, "<title", "</title>");
+        var title = getStringBetween(data.responseText, "<title>", "</title>");
         if(title === null || 
+           (typeof title !== "string") ||
            title.toLowerCase().indexOf("down" !== -1 ||
            title.toLowerCase().indexOf("not available") !== -1)) {
             $('#down').html('YES');
