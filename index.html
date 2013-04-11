@@ -7,35 +7,28 @@
 <!-- This include allows cross domain get requests -->
 <script type="text/javascript" src="https://raw.github.com/padolsey/jQuery-Plugins/master/cross-domain-ajax/jquery.xdomainajax.js"></script>
 
-<!-- Sample -->
 <script type="text/javascript">
 $(document).ready(function(){
-    //gets the href of the first anchor
    setInterval(display(), 2000); 
 });
 
 function display() {
     var url = "http://learn.uwaterloo.ca"
-    var worked = false;
     
     $.get(url, function(data) {
-        worked = true;
         var title = getStringBetween(data.responseText, "<title>", "</title>");
         if(title === null || 
            (typeof title !== "string") ||
-           title.toLowerCase().indexOf("down" !== -1 ||
-           title.toLowerCase().indexOf("not available") !== -1)) {
+           title.toLowerCase().indexOf("down") !== -1 ||
+           title.toLowerCase().indexOf("not available") !== -1) {
             $('#down').html('YES');
         } else {
             $('#down').html('NO');
         }
+        $('#date').html("Updated on: " + (new Date()).toLocaleString());
     });
     
-    if(worked === false) {
-        $('#down').html('YES');
-    }
-    
-    $('#date').html("Updated on: " + (new Date()).toLocaleString())
+    $('#date').html("Updated on: " + (new Date()).toLocaleString());
 }
 
 
